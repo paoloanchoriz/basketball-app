@@ -1,0 +1,39 @@
+<div xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" 
+      xmlns:tiles="http://www.thymeleaf.org" lang="en">
+
+	<div>
+		<span tiles:fragment="title">Expense! Paolo Anchoriz App</span>
+	</div>
+	
+	<div tiles:fragment="header"><h1>Expenses</h1></div>
+	
+	<div tiles:fragment="mainContent">
+		<form method="POST" th:action="@{/expense/save}">
+			<span>Description: <input type="text" name="description"/></span><br/>
+			<span>Amount: <input type="text" name="amount"/></span><br/>
+			<span>Type: <input type="text" name="type"/></span><br/>
+			<span>Comments: <input type="text" name="Comments"/></span><br/>
+			<span><input type="submit" value="Submit"/></span>
+		</form>
+		<hr/>
+		<div th:if="${not #arrays.isEmpty(expenseList)}">
+			<table>
+				<tr>
+					<th>Description</th>
+					<th>Type</th>
+					<th>Amount</th>
+					<th>Date</th>
+					<th>Comments</th>
+				</tr>
+				<tr th:each="expense : ${expenseList}">
+					<td th:text="${expense.description}"></td>
+					<td th:text="${expense.type}"></td>
+					<td th:text="${expense.amount}"></td>
+					<td th:text="${expense.dateString}"></td>
+					<td th:text="${expense.comments}"></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>

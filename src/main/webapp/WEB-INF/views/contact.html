@@ -1,0 +1,17 @@
+<div xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" 
+      xmlns:tiles="http://www.thymeleaf.org" lang="en">
+
+	<div>
+		<span tiles:fragment="title">Contact! Paolo Anchoriz App</span>
+	</div>
+	
+	<div tiles:fragment="header"><h1>Contact Information</h1></div>
+	
+	<div tiles:fragment="mainContent">
+		<span th:inline="text">Name: [[${contactInformation.name}]]</span><br/>
+		<span th:inline="text">Address: [[${contactInformation.address}]]</span><br/>
+		<span th:inline="text">Tel No.: [[${contactInformation.telNo}]]</span><br/>
+		<span th:inline="text">Email: [[${contactInformation.email}]]</span><br/>
+	</div>
+</div>

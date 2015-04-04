@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+<meta charset="UTF-8"/>
+<title>Error page</title>
+</head>
+
+<body>
+<h1>Error Page</h1>
+<p>Application has encountered an error.</p>
+
+<pre>
+Date: [[${datetime}]]
+Failed URL: [[${url}]]
+Exception:  [[${exception.message}]]
+<span th:each="ste: ${exception.stackTrace}" th:text="${ste}"></span>
+</pre>
+
+</body>
+</html>
