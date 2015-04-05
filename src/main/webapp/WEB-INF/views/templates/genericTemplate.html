@@ -17,6 +17,7 @@
                 <ul>
                     <li th:classappend="${homeView != null ? 'active':''}"><a th:href="@{/}">Home</a></li>
                     <li th:classappend="${contactInformation != null ? 'active':''}"><a th:href="@{/contact}">Contact</a></li>
+                    <li th:classappend="${expenseView != null ? 'active':''}"><a th:href="@{/expense}">Expense</a></li>
                 </ul>
             </div><!--/.nav-collapse -->
         </div>
@@ -35,11 +36,32 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script th:src="@{/resources/lib/bootstrap/js/bootstrap.min.js}"></script>
     <script type="text/javascript">
-    	$(document).ready(function() {
-    		$('body .banner-links').on('click', '.active a', function(e) {
-    			e.preventDefault();
-    		});
-    	});
+	    /*<![CDATA[*/
+	    	$(document).ready(function() {
+	    		$('body .banner-links').on('click', '.active a', function(e) {
+	    			e.preventDefault();
+	    		});
+				// Bind all modal's submit button to submit form.
+				$(".modal button[type='submit']").click(function(e) {
+					e.preventDefault();
+					$(this).closest('.modal').find('form').submit();
+				});
+				
+				$(".modal").on("hide.bs.modal", function() {
+					$(this).find('form').trigger('reset');
+				});
+				
+				$(".numeric").keypress(function(e) {
+					if((e.which === 46 && $(this).val().match(/[\.]/)) || 
+							(e.which === 8 || !e.which) || 
+							String.fromCharCode(e.which).match(/[^0-9\.]/)) {
+						e.preventDefault();
+					} 
+		    	});
+	    	});
+	    /*]]>*/
     </script>
+    
+    <div class="javascriptContainer" tiles:include="jsContainer"></div>
 </body>
 </html>
