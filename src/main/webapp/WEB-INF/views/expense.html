@@ -10,15 +10,27 @@
 	
 	<div tiles:fragment="mainContent">
 		<form method="POST" th:action="@{/expense/save}">
-			<span>Description: <input type="text" name="description"/></span><br/>
-			<span>Amount: <input type="text" name="amount"/></span><br/>
-			<span>Type: <input type="text" name="type"/></span><br/>
-			<span>Comments: <input type="text" name="Comments"/></span><br/>
-			<span><input type="submit" value="Submit"/></span>
+			<div class="form-group">
+				<label for="description">Description</label>
+				<input type="text" name="description" class="form-control" id="description" placeholder="Enter Description Here" />
+			</div>
+			<div class="form-group">
+				<label for="amount">Amount</label>
+				<input type="text" name="amount" class="form-control" id="amount" placeholder="Enter Amount Here" />
+			</div>
+			<div class="form-group">
+				<label for="type">Type</label>
+				<input type="text" name="type" class="form-control" id="type" placeholder="Enter Type Here" />
+			</div>
+			<div class="form-group">
+				<label for="comments">Comments</label>
+				<input type="text" name="comments" class="form-control" id="comments" placeholder="Enter Comments Here" />
+			</div>
+			<button type="submit" class="btn btn-default">Submit</button>
 		</form>
 		<hr/>
 		<div th:if="${not #arrays.isEmpty(expenseList)}">
-			<table>
+			<table class="table table-striped">
 				<tr>
 					<th>Description</th>
 					<th>Type</th>
