@@ -3,8 +3,8 @@ package com.panchoriz.myapp.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.panchoriz.myapp.domain.ContactInformation;
 import com.panchoriz.myapp.repositories.ContactInformationRepository;
+import com.panchoriz.myapp.repositories.documents.ContactInformationDocument;
 
 @Service("contactInformationService")
 public class ContactInformationService {
@@ -12,13 +12,13 @@ public class ContactInformationService {
 	@Autowired
 	private ContactInformationRepository contactInformationRepository;
 
-	public ContactInformation getContactInformation() {
-		Iterable<ContactInformation> iterable = contactInformationRepository.findAll();
-		ContactInformation contactInformation = null;
+	public ContactInformationDocument getContactInformation() {
+		Iterable<ContactInformationDocument> iterable = contactInformationRepository.findAll();
+		ContactInformationDocument contactInformation = null;
 		if(iterable != null && iterable.iterator() != null && iterable.iterator().hasNext()) {
 			contactInformation = iterable.iterator().next();		
 		} else {
-			contactInformation = new ContactInformation();
+			contactInformation = new ContactInformationDocument();
 			contactInformation.setName("Paolo Alejandro Anchoriz");
 			contactInformation.setEmail("paolo.anchoriz@gmail.com");
 			contactInformation.setTelNo("09175961429");

@@ -5,6 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import org.joda.time.LocalDate;
+
 public class DateTimeUtil {
 	
 	private DateTimeUtil() {	
@@ -12,12 +14,14 @@ public class DateTimeUtil {
 	
 	private static final SimpleDateFormat FORMAT = new SimpleDateFormat("ddMMMyyyy");
 	
+	private static final SimpleDateFormat WITH_TIME = new SimpleDateFormat("yyyyMMddHHmmssSSS");
+	
 	public static SimpleDateFormat getDateFormatter() {
 		return FORMAT;
 	}
 	
 	public static Date getTodaysDate() {
-		return Calendar.getInstance().getTime();
+		return new LocalDate().toDate();
 	}
 	
 	public static String getStringTodaysDate() {
@@ -36,4 +40,11 @@ public class DateTimeUtil {
 		return FORMAT.format(date);
 	}
 	
+	public static String getFormattedDateWithTime(Date date) {
+		return WITH_TIME.format(date);
+	}
+	
+	public static String getStringTodaysDateWithTime() {
+		return getFormattedDateWithTime(Calendar.getInstance().getTime());
+	}
 }

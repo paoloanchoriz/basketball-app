@@ -5,9 +5,9 @@ import java.math.BigInteger;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.panchoriz.myapp.domain.ContactInformation;
+import com.panchoriz.myapp.repositories.documents.ContactInformationDocument;
 
 @Repository
-public interface ContactInformationRepository extends CrudRepository<ContactInformation, BigInteger> {
+public interface ContactInformationRepository extends CrudRepository<ContactInformationDocument, BigInteger> {
 
 }

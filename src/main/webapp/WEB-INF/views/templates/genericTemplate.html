@@ -7,7 +7,7 @@
     <link th:href="@{/resources/lib/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
     <link th:href="@{/resources/css/app.css}" rel="stylesheet"/>
 </head>
-<body>
+<body ng-app="myApp">
     <div class="banner-container" role="navigation">
         <div class="container">
             <div class="banner-appName">
@@ -34,8 +34,10 @@
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://code.jquery.com/jquery.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script th:src="@{/resources/lib/angular/angular.min.js}"></script>
+    <script th:src="@{/resources/lib/angular/angular-modal-service.min.js}"></script>
     <script th:src="@{/resources/lib/bootstrap/js/bootstrap.min.js}"></script>
-    <script type="text/javascript">
+    <script type="text/javascript" th:inline="javascript">
 	    /*<![CDATA[*/
 	    	$(document).ready(function() {
 	    		$('body .banner-links').on('click', '.active a', function(e) {
@@ -47,8 +49,135 @@
 					$(this).closest('.modal').find('form').submit();
 				});
 				
+				$.fn.populate = (function() {
+					var formObjects = {
+						"SELECT": function(val) { $(this).find("option[value='" + val + "']").prop("selected", true)},
+						"TEXTAREA": function(val) { $(this).val(val) },
+						"INPUT": function(val) {
+							var $_this = $(this);
+							var type = $_this.attr("type");
+							if(type) {
+								type = type.toUpperCase();
+								switch(type) {
+								case "HIDDEN":
+								case "TEXT": $_this.val(val); break;
+								case "RADIO":
+								case "CHECKBOX": {
+										$_this.each(function() {
+											var $_innerThis = $(this);
+											if($_innerThis.val() === val) $_innerThis.prop("checked", true);
+										});
+									}
+								}
+							}
+						}
+					};
+					
+					var populateObj = function(val, callback) {
+						if(Array.isArray(val)) {
+							for(var i in val) {
+								callback.apply(this, [val[i]])
+							}
+						} else {
+							callback.apply(this, [val]);
+						}
+					};
+					
+					return function(model) {
+						var $_this = this;
+						
+						// Reset modal content before populating.
+						$_this.formReset();
+						
+						for(var fieldName in model) {
+							var formObj = $_this.find("[name='" + fieldName + "']");
+							if(!formObj.length) continue;
+							
+							var tagName = formObj.prop("tagName");
+							var callback = tagName && formObjects[tagName];
+							if(callback) {
+								populateObj.apply(formObj, [model[fieldName], callback]);
+							}
+						}
+						
+						return $_this;
+					}
+				})();
+				
+				// Form Reset plugin. Native reset is not working properly.
+				$.fn.formReset = (function() {
+					var resetFunction = function(formObj, callback) {
+						if(formObj.length) {
+							formObj.each(function() {
+								callback($(this));
+							});
+						}
+					};
+					
+					var formObjects = [
+					    {
+							q: function() { return $(this).find("input[type='text'], input[type='hidden'], textArea"); },
+							f: function(obj) { obj.val(""); }
+						},
+						{
+							q: function() { return $(this).find("input:checked"); },
+							f: function(obj) { obj.prop("checked", false); }
+						},
+						{ 
+							q: function() { return $(this).find("select"); },
+							f: function(obj) {
+								obj.find("option:selected").prop("selected", false);
+								obj.find("option:first").prop("selected", true);		
+							}
+						}
+					];
+					
+					return function() {
+						var form = $(this);
+						var tagName = form.prop("tagName");
+						switch(tagName) {
+						case "FORM": {
+								for(var i in formObjects) {
+									var formObject = formObjects[i];
+									resetFunction(formObject.q.apply(form), formObject.f);
+								}	
+							}
+						default: return form;
+						}
+					};
+				})();
+				
+				// Removes error messages and indicators
+				$.fn.resetErrors = (function() {
+					
+					var removeErrors = function() {
+						var errorMessages = $(this).find(".has-error");
+						if(errorMessages.length) {
+							errorMessages.each(function() {
+								$(this).removeClass('has-error')
+									.find('.error-message')
+									.empty()
+									.remove();
+							});
+						}
+					};
+
+					return function() {
+						var form = $(this);
+						var tagName = form.prop("tagName");
+						switch(tagName) {
+						case "FORM": {
+								removeErrors.apply(form);
+							}
+						default: return form;
+						}
+					};
+				})();
+				
 				$(".modal").on("hide.bs.modal", function() {
-					$(this).find('form').trigger('reset');
+					$(this).find('form')
+						.resetErrors()
+						.formReset();					
 				});
 				
 				$(".numeric").keypress(function(e) {
@@ -57,8 +186,60 @@
 							String.fromCharCode(e.which).match(/[^0-9\.]/)) {
 						e.preventDefault();
 					} 
+		    	}).blur(function(e) {
+		    		//TODO: format to amount
 		    	});
+				
+				// Create own Module for this
+				var errorHandler = (function() {
+					var getFailedField = function(fieldName) {
+						return $("form [name='" + fieldName + "']");
+					};
+					
+					var getErrorLabel = function(message) {
+						return $("<label>").addClass("error-message")
+									.text(message);
+					};
+					
+					var addErrors = function(errorArr) {
+						var errorsLength = errorArr.length;
+						for(var i = 0; i < errorsLength; i++) {
+							addError(errorArr[i]);
+						}
+					};
+					
+					var addError = function(error) {
+						var failedField = getFailedField(error.field);
+						if(!failedField.length) return;
+						failedField.closest(".form-group")
+							.addClass("has-error");
+						var firstParent = failedField .closest("div");
+						if(firstParent.length) {
+							firstParent.append(getErrorLabel(error.defaultMessage));
+						}
+					};
+					
+					return {
+						add: function(error) {
+							if(Array.isArray(error)) {
+								addErrors(error);
+							} else {
+								addError(error);
+							}
+						}
+					};
+				})();
+				var errors = /*[[${errors}]]*/ {};
+				// TODO: create own javascript, with utility functions
+				if(errors) {
+					errorHandler.add(errors);
+				}
 	    	});
+	    
+			angular.module("myApp", [
+				'myApp.controllers'                         
+			]);
+			
 	    /*]]>*/
     </script>
     

@@ -1,11 +1,13 @@
-package com.panchoriz.myapp.domain;
+package com.panchoriz.myapp.repositories.documents;
+
+import java.math.BigInteger;
 
 import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document
+@Document(collection="contactInformation")
 @TypeAlias("contactInfo")
-public class ContactInformation extends AbstractDocument {
+public class ContactInformationDocument extends AbstractDocument<BigInteger> {
 	
 	/**
 	 * 
