@@ -1,2 +1,2 @@
-# budget-tracker
-Budget Tracking app. No features yet. Currently working with Expense CRUD.
+# basketball-app
+App for basketball players who want to look for games in their area.
