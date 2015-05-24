@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Index - Should be changeable</title>
+<link href="resources/lib/bootstrap/css/bootstrap.min.css"
+	rel="stylesheet" />
+<link href="resources/css/app.css" rel="stylesheet" />
+</head>
+<body>
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">Basketball App</a>
+			</div>
+		</div>
+		<div class="container-fluid">
+			<div>
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="#/venue">Venue</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<div class="main container" ng-view></div>
+
+	<div id="footer" class="">
+		<div class="container">
+			<p class="text-muted">
+				This is the footer of the Basketball-App
+			</p>
+		</div>
+	</div>
+	<script src="resources/lib/jquery/jquery-2.1.4.min.js"></script>
+	<script src="resources/lib/angular/angular.js"></script>
+	<script src="resources/lib/angular/angular-route.js"></script>
+	<script src="resources/lib/angular/angular-resource.js"></script>
+	<script src="resources/lib/angular/ui-bootstrap-tpls-0.13.0.js"></script>
+	<script src="resources/lib/bootstrap/js/bootstrap.min.js"></script>
+	<script src="resources/js/app.js"></script>
+</body>
+</html>

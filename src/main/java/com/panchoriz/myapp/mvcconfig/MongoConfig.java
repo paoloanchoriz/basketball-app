@@ -1,4 +1,4 @@
-package com.panchoriz.myapp.dbconfig;
+package com.panchoriz.myapp.mvcconfig;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,7 +16,7 @@ public class MongoConfig extends AbstractMongoConfiguration {
 
 	@Override
 	protected String getDatabaseName() {
-		return "budget-tracker";
+		return "basketball-app";
 	}
 
 	@Override
