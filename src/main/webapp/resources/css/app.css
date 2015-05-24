@@ -1,0 +1,284 @@
+@CHARSET "UTF-8";
+
+.full {
+	width: 100%;
+}
+
+.large {
+	width: 80%;
+}
+
+.medium {
+	width: 50%;
+}
+
+.small {
+	width: 30%;
+}
+
+.x_small {
+	width: 17%;
+}
+
+.coordinates>input, .coordinates div {
+	float: left;
+	margin-right: 2px;
+}
+
+div.googleMapsLink {
+	padding: 7px;
+	margin-left: 3px;
+}
+
+/*REQUIRED*/
+.carousel-row {
+	margin-bottom: 10px;
+}
+
+.slide-row {
+	padding: 0;
+	background-color: #ffffff;
+	min-height: 150px;
+	border: 1px solid #e7e7e7;
+	overflow: hidden;
+	height: auto;
+	position: relative;
+}
+
+.slide-carousel {
+	float: left;
+	display: inline-block;
+}
+
+.slide-carousel .carousel-indicators {
+	margin-bottom: 0;
+	bottom: 0;
+	background: rgba(0, 0, 0, .5);
+}
+
+.slide-carousel .carousel-indicators li {
+	border-radius: 0;
+	width: 20px;
+	height: 6px;
+}
+
+.slide-carousel .carousel-indicators .active {
+	margin: 1px;
+}
+
+.slide-content {
+	position: absolute;
+	top: 10px;
+	left: 33%;
+	display: block;
+	float: left;
+	width: 80%;
+	padding: 1.5% 2% 2% 2%;
+	overflow-y: visible;
+}
+
+.slide-content h4 {
+	margin-bottom: 3px;
+	margin-top: 0;
+}
+
+.slide-footer {
+	position: absolute;
+	bottom: 0;
+	left: 20%;
+	width: 78%;
+	margin: 1%;
+}
+
+/* Scrollbars */
+.slide-content::-webkit-scrollbar {
+	width: 5px;
+}
+
+.slide-content::-webkit-scrollbar-thumb:vertical {
+	margin: 5px;
+	background-color: #999;
+	-webkit-border-radius: 5px;
+}
+
+.slide-content::-webkit-scrollbar-button:start:decrement, .slide-content::-webkit-scrollbar-button:end:increment {
+	height: 5px;
+	display: block;
+}
+
+div.col-80 {
+	width: 80%;
+	height: 185px;;
+}
+
+.custom-carousel-inner>.item>img {
+	width: 300px;
+	height: 185px;
+}
+
+div.form-container {
+	width: 70%;
+}
+
+span.venue-form-buttons {
+	padding-right: 15%;
+}
+
+.btn.dropdown-toggle ~ .dropdown-menu, ul.nav li.dropdown ul.dropdown-menu {
+	background-color: rgb(244, 244, 244);
+	background-color: rgb(255, 255, 255);
+	border: 0 solid rgb(66, 133, 244);
+	box-shadow: 0px 0px 3px rgba(25, 25, 25, 0.3);
+	top: 0px;
+	margin: 0px;
+	padding: 0px;
+}
+
+ul.nav li.dropdown ul.dropdown-menu {
+	position: absolute;
+	width: 100%;
+}
+
+.dropdown-menu .dropdown-plus-title {
+	width: 100%;
+	color: rgb(51, 51, 51);
+	padding: 6px 12px;
+	font-weight: 800;
+	border: 0 solid rgb(173, 173, 173);
+	border-bottom-width: 2px;
+	cursor: pointer;
+}
+
+ul.nav li.dropdown ul.dropdown-menu .dropdown-plus-title {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	line-height: 20px;
+}
+
+.btn.dropdown-toggle.btn-primary ~ .dropdown-menu .dropdown-plus-title {
+	border-color: rgb(53, 126, 189);
+}
+
+.btn.dropdown-toggle.btn-success ~ .dropdown-menu .dropdown-plus-title {
+	border-color: rgb(76, 174, 76);
+}
+
+.btn.dropdown-toggle.btn-info ~ .dropdown-menu .dropdown-plus-title {
+	border-color: rgb(70, 184, 218);
+}
+
+.btn.dropdown-toggle.btn-warning ~ .dropdown-menu .dropdown-plus-title {
+	border-color: rgb(238, 162, 54);
+}
+
+.btn.dropdown-toggle.btn-danger ~ .dropdown-menu .dropdown-plus-title {
+	border-color: rgb(212, 63, 58);
+}
+
+@media ( min-width : 768px) {
+	ul.nav li.dropdown ul.dropdown-menu .dropdown-plus-title {
+		padding-top: 15px;
+		padding-bottom: 15px;
+	}
+}
+
+@media ( min-width : 768px) {
+	ul.nav li.dropdown ul.dropdown-menu {
+		width: auto;
+	}
+}
+
+span.add-new-venue {
+	margin-right: 21.3%;
+	margin-top: 5px;
+	margin-bottom: 8px;
+}
+
+button.btn-sm-list {
+	padding: 3px 6px;
+}
+
+#footer {
+	height: 60px;
+	margin-top: 50px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	background-color: #414141;
+}
+
+div.main.container {
+	padding-top: 60px;
+}
+
+div.btn-group-venue-list {
+	position: absolute;
+	left: 79%;
+  	top: 0;
+}
+
+.btn-group-venue-list .dropdown-menu {
+	left: auto;
+  	right: 0;
+  	overflow-y: visible;
+}
+
+.btn-group-venue-list .btn .caret {
+	margin-left: -4px;
+	margin-bottom: 14px;
+}
+
+.btn-group-venue-list.btn-group>.btn:first-child {
+	height: 20px;
+	width: 5px;
+}
+
+.slide-footer {
+	font-size: 12px;
+}
+
+div.venue-list {
+	min-height: 515px;
+}
+
+div.row.venue-search {
+	width: 79.2%;
+  	margin-left: 5px;
+}
+
+div.venue-search input.search {
+	width: 18%;
+}
+
+div.court-type-filter {
+	margin-top: 10px;
+}
+
+label.filter-check {
+	margin-left: 1px;
+  	font-size: 12px;
+  	font-weight: normal;
+}
+
+label.filter-check input[type='checkbox'] {
+	margin-right: 2px;
+}
+
+span.court-type-check {
+	margin-right: 20px;
+}
+
+div.venue-search button.btn.search {
+	height: 25px;
+  	padding: 2px 6px 2px 6px;
+  	margin-left: 20px;
+}
+
+span.empty-search { 
+	font-size: 20px;
+	font-weight: bold;
+}
+
+div.venue-list .pagination-sm {
+	float: right;
+	margin-right: 19.5%;
+}

@@ -1,5 +1,5 @@
 /target/*
 /tools/*
 /src/test/*
-/src/main/webapp/resources/*
-/target
+
+!/target/generated-sources
