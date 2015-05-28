@@ -88,6 +88,7 @@ function VenueListController($scope, Venue) {
 	}
 	
 	var search = function(pageNo) {
+		pageNo = pageNo || 1;
 		Venue.search({
 			pageNo: (pageNo - 1), 
 			searchCondition: $scope.searchCondition, 

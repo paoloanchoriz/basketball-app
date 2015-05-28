@@ -1,53 +1,55 @@
 
 
-<div class="container venue-list">
-	<div>
-		<h2>Venues</h2>
-		
-	</div>
+<div class="container-fluid venue-list">
 	<div class="row">
+		<h2>Venues</h2>
 		<span class="pull-right add-new-venue"><a href="#/venue/add">Add
 						new venue</a></span>
-		<div class="row venue-search" style="widht:inherit;">
-			<div id="filter-panel" class="filter-panel">
-				<div class="panel panel-default">
-					<div class="panel-body form-inline">
-							<label class="filter-col" for="search">Search: </label>
-							<input type="text" class="form-control input-sm search" placeholder="Search" id="search" ng-model="searchCondition"/>
-							
-							<label class="filter-col" for="province">Location: </label>
-							<input type="text" class="form-control input-sm search" placeholder="Province" id="province" ng-model="province"/>
-							<input type="text" class="form-control input-sm search" placeholder="City/Municipality" id="city" ng-model="city"/>
-							
-							<div class="court-type-filter">
-								<span class="court-type-check">
-									<label class="filter-col">Court: </label>
-									<label class="filter-check" for="courtType_1"><input type="checkbox"
-										name="courtType" value="1" id="courtType_1" ng-model="courtType.indoor">Indoor</label>
-									<label class="filter-check" for="courtType_2"><input type="checkbox"
-										name="courtType" value="2" id="courtType_2" ng-model="courtType.covered">Covered</label>
-									<label class="filter-check" for="courtType_3"><input type="checkbox"
-										name="courtType" value="3" id="courtType_3" ng-model="courtType.outdoor">Outdoor</label>		
-								</span>	
-								<span class="court-type-check">
-								<label class="filter-col" for="province">Floor: </label>
-									<label class="filter-check" for="floorType_1"><input type="checkbox"
-										name="floorType" value="1" id="floorType_1" ng-model="floorType.hardWood">Hardwood</label>
-									<label class="filter-check" for="floorType_2"><input type="checkbox"
-										name="floorType" value="2" id="floorType_2" ng-model="floorType.rubberized">Rubberized</label>
-									<label class="filter-check" for="floorType_3"><input type="checkbox"
-										name="floorType" value="3" id="floorType_3" ng-model="floorType.cement">Cement</label>
-								</span>
-								<span class="buttons">
-									<button class="btn btn-primary search" ng-click="searchAction()">
-										Search
-									</button>
-								</span>
-							</div>
+	</div>
+	
+	<div class="row" id="venue-search">
+		<div class="form-group">
+			<div class="col-md-9">
+				<div class="form-group row">
+					<label for="search" class="col-md-1 control-label filter-col">Search: </label>
+					<div class="col-md-3">	
+						<input type="text" class="col-md-3 form-control" id="search" placeholder="Search" id="search" ng-model="searchCondition"/>
 					</div>
 					
+					<label for="province" class="col-md-1 control-label filter-col">Location: </label>
+					<div class="col-md-3 pair-left">	
+						<input type="text" class="col-md-3 form-control" id="search" placeholder="Province" id="province" ng-model="province"/>
+					</div>
+					<div class="col-md-3 pair-right">
+						<input type="text" class="col-md-3 form-control" id="search" placeholder="City" id="city" ng-model="city"/>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label class="col-md-1 control-label filter-col">Court: </label>
+					<div class="col-sm-4 filter-check-group court-type">	
+						<label class="filter-check" for="courtType_1"><input type="checkbox"
+							name="courtType" value="1" id="courtType_1" ng-model="courtType.indoor">Indoor</label>
+						<label class="filter-check" for="courtType_2"><input type="checkbox"
+							name="courtType" value="2" id="courtType_2" ng-model="courtType.covered">Covered</label>
+						<label class="filter-check" for="courtType_3"><input type="checkbox"
+							name="courtType" value="3" id="courtType_3" ng-model="courtType.outdoor">Outdoor</label>
+					</div>
+									
+					<label for="province" class="col-md-1 control-label filter-col">Floor: </label>
+					<div class="col-md-4 filter-check-group">	
+						<label class="filter-check" for="floorType_1"><input type="checkbox"
+							name="floorType" value="1" id="floorType_1" ng-model="floorType.hardWood">Hardwood</label>
+						<label class="filter-check" for="floorType_2"><input type="checkbox"
+							name="floorType" value="2" id="floorType_2" ng-model="floorType.rubberized">Rubberized</label>
+						<label class="filter-check" for="floorType_3"><input type="checkbox"
+							name="floorType" value="3" id="floorType_3" ng-model="floorType.cement">Cement</label>
+					</div>
+					<button class="btn btn-primary search" ng-click="searchAction()">
+						Search
+					</button>
 				</div>
 			</div>
+			
 		</div>
 	</div>
 	
@@ -59,7 +61,7 @@
 	</div>
 	<div class="row carousel-row" ng-repeat="venue in venues">
 		
-		<div class="col-xs-8 col-80 slide-row">
+		<div class="col-md-9 col-80 slide-row">
 			<div id="carousel-{{$index}}" class="carousel slide slide-carousel"
 				data-ride="carousel">
 				<!-- Indicators -->

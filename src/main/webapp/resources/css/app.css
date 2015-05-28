@@ -208,6 +208,7 @@ button.btn-sm-list {
 
 div.main.container {
 	padding-top: 60px;
+	margin-bottom: 100px;
 }
 
 div.btn-group-venue-list {
@@ -240,39 +241,6 @@ div.venue-list {
 	min-height: 515px;
 }
 
-div.row.venue-search {
-	width: 79.2%;
-  	margin-left: 5px;
-}
-
-div.venue-search input.search {
-	width: 18%;
-}
-
-div.court-type-filter {
-	margin-top: 10px;
-}
-
-label.filter-check {
-	margin-left: 1px;
-  	font-size: 12px;
-  	font-weight: normal;
-}
-
-label.filter-check input[type='checkbox'] {
-	margin-right: 2px;
-}
-
-span.court-type-check {
-	margin-right: 20px;
-}
-
-div.venue-search button.btn.search {
-	height: 25px;
-  	padding: 2px 6px 2px 6px;
-  	margin-left: 20px;
-}
-
 span.empty-search { 
 	font-size: 20px;
 	font-weight: bold;
@@ -281,4 +249,36 @@ span.empty-search {
 div.venue-list .pagination-sm {
 	float: right;
 	margin-right: 19.5%;
+}
+
+.container .text-muted {
+  margin: 20px 0;
+}
+
+div#venue-search label {
+	margin-top: 2px;
+}
+
+div#venue-search input[type='text'] {
+	height: 25px;
+}
+
+div#venue-search div.form-group label, 
+div#venue-search div.form-group div {
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+div#venue-search div.form-group label.filter-check {
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+div#venue-search input[type="checkbox"] {
+	margin-top: 0px;
+}
+
+div#venue-search .btn {
+	padding: 2px;
+	margin-left: 10px;
 }

@@ -24,7 +24,7 @@ public class VenueController {
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public Page<VenueDTO> getList(@RequestParam(value = "pageNo", required = true)int pageNo, 
-			@RequestParam(value = "search", required = false)String searchCondition, 
+			@RequestParam(value = "searchCondition", required = false)String searchCondition, 
 			@RequestParam(value = "province", required = false)String province, 
 			@RequestParam(value = "city", required = false)String city, 
 			@RequestParam(value = "courtType", required = false)Number[] courtType, 
