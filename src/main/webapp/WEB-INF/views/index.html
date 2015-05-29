@@ -32,8 +32,10 @@
 	</nav>
 	
 	
-	<div class="container">
-		<div class="row main container" ng-view></div>
+	<div class="container main-content">
+		<div class="row">
+			<div id="body-proper" ng-view></div>
+		</div>
 	</div>
 	
 	<footer class="footer navbar-inverse">
@@ -41,6 +43,8 @@
 			<p class="text-muted">This is the footer of the Basketball-App</p>
 		</div>
     </footer>
+    
+    
 	<script src="resources/lib/jquery/jquery-2.1.4.min.js"></script>
 	<script src="resources/lib/angular/angular.js"></script>
 	<script src="resources/lib/angular/angular-route.js"></script>

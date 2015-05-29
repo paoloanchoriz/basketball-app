@@ -101,7 +101,8 @@ div.googleMapsLink {
 	-webkit-border-radius: 5px;
 }
 
-.slide-content::-webkit-scrollbar-button:start:decrement, .slide-content::-webkit-scrollbar-button:end:increment {
+.slide-content::-webkit-scrollbar-button:start:decrement, .slide-content::-webkit-scrollbar-button:end:increment
+	{
 	height: 5px;
 	display: block;
 }
@@ -116,15 +117,8 @@ div.col-80 {
 	height: 185px;
 }
 
-div.form-container {
-	width: 70%;
-}
-
-span.venue-form-buttons {
-	padding-right: 15%;
-}
-
-.btn.dropdown-toggle ~ .dropdown-menu, ul.nav li.dropdown ul.dropdown-menu {
+.btn.dropdown-toggle ~ .dropdown-menu, ul.nav li.dropdown ul.dropdown-menu
+	{
 	background-color: rgb(244, 244, 244);
 	background-color: rgb(255, 255, 255);
 	border: 0 solid rgb(66, 133, 244);
@@ -189,8 +183,8 @@ ul.nav li.dropdown ul.dropdown-menu .dropdown-plus-title {
 }
 
 span.add-new-venue {
-	margin-right: 21.3%;
-	margin-top: 5px;
+	/* margin-right: 21.3%; 
+	margin-top: 5px;*/
 	margin-bottom: 8px;
 }
 
@@ -213,14 +207,13 @@ div.main.container {
 
 div.btn-group-venue-list {
 	position: absolute;
-	left: 79%;
-  	top: 0;
+	left: 90%;
 }
 
 .btn-group-venue-list .dropdown-menu {
 	left: auto;
-  	right: 0;
-  	overflow-y: visible;
+	right: 0;
+	overflow-y: visible;
 }
 
 .btn-group-venue-list .btn .caret {
@@ -237,22 +230,17 @@ div.btn-group-venue-list {
 	font-size: 12px;
 }
 
-div.venue-list {
-	min-height: 515px;
-}
-
-span.empty-search { 
+span.empty-search {
 	font-size: 20px;
 	font-weight: bold;
 }
 
 div.venue-list .pagination-sm {
 	float: right;
-	margin-right: 19.5%;
 }
 
 .container .text-muted {
-  margin: 20px 0;
+	margin: 20px 0;
 }
 
 div#venue-search label {
@@ -263,8 +251,8 @@ div#venue-search input[type='text'] {
 	height: 25px;
 }
 
-div#venue-search div.form-group label, 
-div#venue-search div.form-group div {
+div#venue-search div.form-group label, div#venue-search div.form-group div
+	{
 	padding-left: 5px;
 	padding-right: 5px;
 }
@@ -282,3 +270,29 @@ div#venue-search .btn {
 	padding: 2px;
 	margin-left: 10px;
 }
+
+div#body-proper {
+	min-height: 680px;
+	padding-bottom: 75px;
+	margin-top: 80px;
+	margin-bottom: 60px;
+	margin-right: 25px;
+	margin-left: 25px;
+}
+
+label.right-align {
+	text-align: right;
+}
+
+li.venue-name {
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.footer {
+  position: relative;
+  margin-top: -75px; /* negative value of footer height */
+  height: 75px;
+  clear:both;
+  padding-top:10px;
+} 

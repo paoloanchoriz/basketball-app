@@ -1,70 +1,130 @@
 
 
-<div class="container-fluid venue-list">
-	<div class="row">
-		<h2>Venues</h2>
-		<span class="pull-right add-new-venue"><a href="#/venue/add">Add
-						new venue</a></span>
-	</div>
-	
-	<div class="row" id="venue-search">
-		<div class="form-group">
-			<div class="col-md-9">
-				<div class="form-group row">
-					<label for="search" class="col-md-1 control-label filter-col">Search: </label>
-					<div class="col-md-3">	
-						<input type="text" class="col-md-3 form-control" id="search" placeholder="Search" id="search" ng-model="searchCondition"/>
+<div class="venue-list">
+	<div>
+		<div class="row">
+			<h2>Venues</h2>
+			<span class="pull-right add-new-venue"><a href="#/venue/add">Add
+					new venue</a></span>
+		</div>
+
+		<div class="row" id="venue-search">
+			<div class="form-group">
+				<div>
+					<div class="form-group row">
+						<label for="search" class="col-md-1 control-label filter-col">Search:
+						</label>
+						<div class="col-md-3">
+							<input type="text" class="col-md-3 form-control" id="search"
+								placeholder="Search" id="search" ng-model="searchCondition" />
+						</div>
+
+						<label for="province"
+							class="col-md-2 control-label filter-col right-align">Location:
+						</label>
+						<div class="col-md-3 pair-left">
+							<input type="text" class="col-md-3 form-control" id="search"
+								placeholder="Province" id="province" ng-model="province" />
+						</div>
+						<div class="col-md-3 pair-right">
+							<input type="text" class="col-md-3 form-control" id="search"
+								placeholder="City" id="city" ng-model="city" />
+						</div>
 					</div>
-					
-					<label for="province" class="col-md-1 control-label filter-col">Location: </label>
-					<div class="col-md-3 pair-left">	
-						<input type="text" class="col-md-3 form-control" id="search" placeholder="Province" id="province" ng-model="province"/>
-					</div>
-					<div class="col-md-3 pair-right">
-						<input type="text" class="col-md-3 form-control" id="search" placeholder="City" id="city" ng-model="city"/>
+					<div class="form-group row">
+						<label class="col-md-1 control-label filter-col">Court: </label>
+						<div class="col-sm-4 filter-check-group court-type">
+							<label class="filter-check" for="courtType_1"><input
+								type="checkbox" name="courtType" value="1" id="courtType_1"
+								ng-model="courtType.indoor">Indoor</label> <label
+								class="filter-check" for="courtType_2"><input
+								type="checkbox" name="courtType" value="2" id="courtType_2"
+								ng-model="courtType.covered">Covered</label> <label
+								class="filter-check" for="courtType_3"><input
+								type="checkbox" name="courtType" value="3" id="courtType_3"
+								ng-model="courtType.outdoor">Outdoor</label>
+						</div>
+
+						<label class="col-md-1 control-label filter-col right-align">Floor:
+						</label>
+						<div class="col-md-5 filter-check-group">
+							<label class="filter-check" for="floorType_1"><input
+								type="checkbox" name="floorType" value="1" id="floorType_1"
+								ng-model="floorType.hardWood">Hardwood</label> <label
+								class="filter-check" for="floorType_2"><input
+								type="checkbox" name="floorType" value="2" id="floorType_2"
+								ng-model="floorType.rubberized">Rubberized</label> <label
+								class="filter-check" for="floorType_3"><input
+								type="checkbox" name="floorType" value="3" id="floorType_3"
+								ng-model="floorType.cement">Cement</label>
+						</div>
+						<button class="btn btn-primary search" ng-click="searchAction()">
+							Search</button>
 					</div>
 				</div>
-				<div class="form-group row">
-					<label class="col-md-1 control-label filter-col">Court: </label>
-					<div class="col-sm-4 filter-check-group court-type">	
-						<label class="filter-check" for="courtType_1"><input type="checkbox"
-							name="courtType" value="1" id="courtType_1" ng-model="courtType.indoor">Indoor</label>
-						<label class="filter-check" for="courtType_2"><input type="checkbox"
-							name="courtType" value="2" id="courtType_2" ng-model="courtType.covered">Covered</label>
-						<label class="filter-check" for="courtType_3"><input type="checkbox"
-							name="courtType" value="3" id="courtType_3" ng-model="courtType.outdoor">Outdoor</label>
+
+			</div>
+		</div>
+	</div>
+
+	<div class="row" ng-show="!venues.length">
+		<div>
+			<span class="empty-search">Search Condition did not return
+				any results.</span>
+			<div>
+				<span>Please try another set of conditions.</span>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="row" ng-repeat="venue in venues">
+		<div>
+			<div class="panel panel-default">
+				<div class="panel-heading resume-heading">
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="col-xs-12 col-sm-4">
+								<figure>
+									<img class="img-responsive" alt=""
+										src="resources/img/clover3.jpg" />
+								</figure>
+							</div>
+							<div class="col-xs-12 col-sm-8">
+								<ul class="list-group">
+									<li class="list-group-item venue-name">
+										{{ venue.venueName }}
+										<div class="btn-group btn-group-venue-list">
+											<button type="button" class="btn btn-default dropdown-toggle"
+												data-toggle="dropdown">
+												<span class="caret"></span>
+											</button>
+											<ul class="dropdown-menu" role="menu">
+												<li class="dropdown-plus-title">Options <b
+													class="pull-right glyphicon glyphicon-chevron-up"></b>
+												</li>
+												<li><a href="#">Create Game</a></li>
+												<li><a href="#">Show Map</a></li>
+												<li><a href="#/venue/{{venue.venueId}}">Edit Information</a></li>
+											</ul>
+										</div>
+									</li>
+									<li class="list-group-item">{{ venue.streetAddress }}</li>
+									<li class="list-group-item">{{ venue.city }}, {{ venue.province }}</li>
+									<li class="list-group-item"><i class="fa fa-phone"></i>{{ venue.contact }}</li>
+									<li class="list-group-item">{{ venue.courtType | courtType }}, {{ venue.flooringType | floorType }}</li>
+								</ul>
+								
+							</div>
+						</div>
 					</div>
-									
-					<label for="province" class="col-md-1 control-label filter-col">Floor: </label>
-					<div class="col-md-4 filter-check-group">	
-						<label class="filter-check" for="floorType_1"><input type="checkbox"
-							name="floorType" value="1" id="floorType_1" ng-model="floorType.hardWood">Hardwood</label>
-						<label class="filter-check" for="floorType_2"><input type="checkbox"
-							name="floorType" value="2" id="floorType_2" ng-model="floorType.rubberized">Rubberized</label>
-						<label class="filter-check" for="floorType_3"><input type="checkbox"
-							name="floorType" value="3" id="floorType_3" ng-model="floorType.cement">Cement</label>
-					</div>
-					<button class="btn btn-primary search" ng-click="searchAction()">
-						Search
-					</button>
 				</div>
 			</div>
-			
 		</div>
-	</div>
-	
-	<div class="container" ng-show="!venues.length">
-		<span class="empty-search" >Search Condition did not return any results.</span>
-		<div>
-			<span>Please try another set of conditions.</span>
-		</div>
-	</div>
-	<div class="row carousel-row" ng-repeat="venue in venues">
-		
-		<div class="col-md-9 col-80 slide-row">
+		<!-- <div class="col-md-9 col-80 slide-row">
 			<div id="carousel-{{$index}}" class="carousel slide slide-carousel"
 				data-ride="carousel">
-				<!-- Indicators -->
+				Indicators
 				<ol class="carousel-indicators">
 					<li data-target="#carousel-{{$index}}" data-slide-to="0"
 						class="active"></li>
@@ -72,7 +132,7 @@
 					<li data-target="#carousel-{{$index}}" data-slide-to="2"></li>
 				</ol>
 
-				<!-- Wrapper for slides -->
+				Wrapper for slides
 				<div class="carousel-inner custom-carousel-inner">
 					<div class="item active">
 						<img src="resources/img/clover1.jpg" alt="Image">
@@ -103,21 +163,23 @@
 				<h4>{{ venue.venueName }}</h4>
 				<span class="small">{{ venue.streetAddress }}, {{ venue.city
 					}}, {{ venue.province }}</span> <br />
-				<!-- street address, city, region -->
+				street address, city, region
 				<span class="medium"><label class="strong">Contact
 						No.:&nbsp;</label>{{ venue.contact }}</span> <br />
-				<!-- contact number -->
+				contact number
 				<span class="medium"><label class="strong">Rate:&nbsp;</label>{{
 					venue.rate | phPeso }}</span> <br />
-				<!-- rate per hour -->
+				rate per hour
 				<span class="medium"><label class="strong">Type:&nbsp;</label>{{
 					venue.courtType | courtType }}, {{ venue.flooringType | floorType
 					}}</span>
-				<!-- court type, flooring type -->
+				court type, flooring type
 			</div>
-		</div>
+		</div> -->
 	</div>
-	
-	<pagination ng-click="searchAction(pageNo)" max-size="10" items-per-page="10" ng-show="totalPages > 1" total-items="totalElements" ng-model="pageNo" class="pagination-sm" rotate="true" boundary-links="true"></pagination>
-	
+
+	<pagination ng-click="searchAction(pageNo)" max-size="10" ng-show="totalElements"
+		items-per-page="10" total-items="totalElements" ng-model="pageNo"
+		class="pagination-sm" rotate="true" boundary-links="true"></pagination>
+
 </div>
