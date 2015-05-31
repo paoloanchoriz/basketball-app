@@ -6,9 +6,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class HomeController {
 
-	@RequestMapping("/")
+	@RequestMapping("/bbapp")
 	public String getIndex() {
 		return "index";
 	}
 	
+	@RequestMapping("/")
+	public String getSampleGoogleMaps() {
+		return "sampleGoogleMaps";
+	}
 }
