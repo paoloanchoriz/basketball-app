@@ -76,7 +76,7 @@
 	</div>
 
 
-	<div class="row" ng-repeat="venue in venues">
+	<div class="row" ng-repeat="venue in venues" ng-show="venues.length">
 		<div>
 			<div class="panel panel-default">
 				<div class="panel-heading resume-heading">
@@ -102,7 +102,7 @@
 													class="pull-right glyphicon glyphicon-chevron-up"></b>
 												</li>
 												<li><a href="#">Create Game</a></li>
-												<li><a href="#">Show Map</a></li>
+												<li><a href="" ng-click="showMap($index)">Show Map</a></li>
 												<li><a href="#/venue/{{venue.venueId}}">Edit Information</a></li>
 											</ul>
 										</div>
@@ -123,7 +123,12 @@
 	<pagination ng-click="searchAction(pageNo)" max-size="10" ng-show="totalElements"
 		items-per-page="10" total-items="totalElements" ng-model="pageNo"
 		class="pagination-sm" rotate="true" boundary-links="true"></pagination>
-	
-	
-	
+	<script type="text/ng-template" id="venueMap.html">
+        <div class="modal-header">
+            <h3 class="modal-title">{{venue.venueName}}</h3>
+        </div>
+        <div class="modal-body">
+            <div id="map-canvas"></div>
+        </div>
+    </script>
 </div>

@@ -35,7 +35,8 @@ angular.module('myApp', ['ngRoute', 'ngResource', 'ui.bootstrap', 'uiGmapgoogle-
     		return result;
     	}
     }]).factory('Venue', ['$resource', function($resource) {
-    	var Venue = $resource(window.location.pathname + 'venue/:venueId', { venueId: '@id'}, 
+    	//TODO: Need to change the path to a more configurable way
+    	var Venue = $resource('/basketball-app/venue/:venueId', { venueId: '@id'}, 
     			{
     				'search': { 'method': 'GET' },
     				'update': { 'method': 'PUT' }
@@ -47,17 +48,27 @@ angular.module('myApp', ['ngRoute', 'ngResource', 'ui.bootstrap', 'uiGmapgoogle-
     			$templateCache.remove(current.templateUrl);
     		}
     	});
-    }]);
+    }]).controller('VenueMapController', function($scope, $modalInstance, venueDetails) {
+    	$scope.venue = venueDetails;
+    	var myOptions = {
+    		zoom: 16,
+    		center: { lat: venueDetails.latitude, lng: venueDetails.longitude }
+    	}
+    	console.log(myOptions);
+    	console.log(document.getElementById("map-canvas"));
+    	var map = new google.maps.Map(document.getElementById("map-canvas"), myOptions)
+    });
+
 
 function VenueCreateController($scope, $location, Venue) {
 	$scope.venue = new Venue();
-	
+
 	// Set Default Values
 	$scope.venue.longitude = 15000;
 	$scope.venue.latitude = 15000;
 	$scope.venue.courtType = 1;
 	$scope.venue.flooringType = 1;
-	
+
 	$scope.save = function() {
 		$scope.venue.$save(function() {
 			$location.path('/venue');
@@ -65,61 +76,81 @@ function VenueCreateController($scope, $location, Venue) {
 	}
 }
 
-function VenueListController($scope, Venue) {
+function VenueListController($scope, $modal, Venue) {
 	$scope.searchCondition = "";
 	$scope.city = "";
 	$scope.province = "";
 	$scope.pageNo = 1;
-	var courtTypes = ['indoor', 'covered', 'outdoor'];
-	var floorTypes = ['hardWood', 'rubberized', 'cement'];
+	var courtTypes = [ 'indoor', 'covered', 'outdoor' ];
+	var floorTypes = [ 'hardWood', 'rubberized', 'cement' ];
 	var setDefaults = function(obj, types) {
 		var length = types.length;
-		for(var i = 0; i < length; i++) {
+		for (var i = 0; i < length; i++) {
 			obj[types[i]] = true;
 		}
 	}
 	setDefaults($scope.courtType = {}, courtTypes);
 	setDefaults($scope.floorType = {}, floorTypes);
-	
+
 	var getTypeArr = function(obj, types) {
 		var courtTypeArr = [];
 		var length = types.length;
-		for(var i = 0; i < length; i++) {
+		for (var i = 0; i < length; i++) {
 			var fieldName = types[i];
-			if(obj[fieldName]) courtTypeArr.push(i + 1);
+			if (obj[fieldName])
+				courtTypeArr.push(i + 1);
 		}
 		return courtTypeArr.join(",");
 	}
-	
+
 	var search = function(pageNo) {
 		pageNo = pageNo || 1;
 		Venue.search({
-			pageNo: (pageNo - 1), 
-			searchCondition: $scope.searchCondition, 
-			province: $scope.province,
-			city: $scope.city,
-			courtType: getTypeArr($scope.courtType, courtTypes),
-			floorType: getTypeArr($scope.floorType, floorTypes)
-		},function(response) {
+			pageNo : (pageNo - 1),
+			searchCondition : $scope.searchCondition,
+			province : $scope.province,
+			city : $scope.city,
+			courtType : getTypeArr($scope.courtType, courtTypes),
+			floorType : getTypeArr($scope.floorType, floorTypes)
+		}, function(response) {
+			console.log(response.content);
 			$scope.venues = response.content;
 			$scope.totalPages = response.totalPages;
 			$scope.totalElements = response.totalElements;
 		});
 	}
-	
+
 	search($scope.pageNo);
-	
+
 	$scope.searchAction = function(pageNo) {
 		$scope.pageNo = pageNo;
 		search($scope.pageNo);
 	}
+
+	$scope.showMap = function(inx) {
+		console.log($scope.venues[inx]);
+		var modalInstance = $modal.open({
+			animation : true,
+			templateUrl : 'venueMap.html',
+			controller : 'VenueMapController',
+			resolve : {
+				venueDetails : function() {
+					return $scope.venues[inx];
+				}
+			}
+		});
+	}
 }
 
 function VenueEditController($scope, $routeParams, $location, Venue) {
-	$scope.venue = Venue.get({ venueId: $routeParams.venueId });
-	
+	$scope.venue = Venue.get({
+		venueId : $routeParams.venueId
+	});
+
 	$scope.save = function() {
-		$scope.venue.$update({venueId: $scope.venue.venueId }, function() {
+		$scope.venue.$update({
+			venueId : $scope.venue.venueId
+		}, function() {
 			$location.path('/venue');
 		});
 	}
