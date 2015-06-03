@@ -1,11 +1,15 @@
-angular.module('myApp', ['ngRoute', 'ngResource', 'ui.bootstrap']).
-    config(function ($routeProvider) {
+angular.module('myApp', ['ngRoute', 'ngResource', 'ui.bootstrap', 'uiGmapgoogle-maps']).
+    config(['$routeProvider', 'uiGmapGoogleMapApiProvider', function ($routeProvider, uiGmapGoogleMapApiProvider) {
         $routeProvider
         	.when('/venue', {templateUrl: 'view/venue/list', controller: VenueListController})
         	.when('/venue/add', {templateUrl: 'view/venue/add', controller: VenueCreateController})
         	.when('/venue/:venueId', {templateUrl: 'view/venue/add', controller: VenueEditController})
         	.otherwise({ redirectTo: '/venue' });
-    }).filter('courtType', function() {
+        
+        uiGmapGoogleMapApiProvider.configure({
+        	v: '3.20'
+        });
+    }]).filter('courtType', function() {
     	var courtTypeMap = {
     		1: 'Indoor',
     		2: 'Covered',
