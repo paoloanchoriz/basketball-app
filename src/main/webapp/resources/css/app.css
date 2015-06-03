@@ -272,12 +272,12 @@ div#venue-search .btn {
 }
 
 div#body-proper {
-	min-height: 680px;
-	padding-bottom: 75px;
+	min-height: 680px; padding-bottom : 75px;
 	margin-top: 80px;
 	margin-bottom: 60px;
 	margin-right: 25px;
 	margin-left: 25px;
+	padding-bottom: 75px;
 }
 
 label.right-align {
@@ -290,9 +290,25 @@ li.venue-name {
 }
 
 .footer {
-  position: relative;
-  margin-top: -75px; /* negative value of footer height */
-  height: 75px;
-  clear:both;
-  padding-top:10px;
-} 
+	position: relative;
+	margin-top: -75px; /* negative value of footer height */
+	height: 75px;
+	clear: both;
+	padding-top: 10px;
+}
+
+div.modal-body #map_canvas {
+	height: 538px;
+}
+
+ui-gmap-google-map, div[ui-gmap-google-map] {
+	display: block;
+	width: 450px;
+	height: 300px;
+}
+
+.angular-google-map-container {
+	height: 538px;
+	width: 538px;
+	position: absolute;
+}

@@ -50,13 +50,22 @@ angular.module('myApp', ['ngRoute', 'ngResource', 'ui.bootstrap', 'uiGmapgoogle-
     	});
     }]).controller('VenueMapController', function($scope, $modalInstance, venueDetails) {
     	$scope.venue = venueDetails;
-    	var myOptions = {
+    	$scope.map = {
     		zoom: 16,
-    		center: { lat: venueDetails.latitude, lng: venueDetails.longitude }
-    	}
-    	console.log(myOptions);
-    	console.log(document.getElementById("map-canvas"));
-    	var map = new google.maps.Map(document.getElementById("map-canvas"), myOptions)
+    		center: { latitude: venueDetails.latitude, longitude: venueDetails.longitude },
+    		events : {
+    			tilesloaded: function (map) {
+    				$scope.$apply(function () {
+    					console.log('this is the map instance');
+    					console.log(map);
+    	            });
+    			}
+    		}
+	    	
+    	};
+    	$scope.options = { disableDoubleClickZoom: true };
+    	
+    	$scope.render = true;
     });
 
 
@@ -113,7 +122,6 @@ function VenueListController($scope, $modal, Venue) {
 			courtType : getTypeArr($scope.courtType, courtTypes),
 			floorType : getTypeArr($scope.floorType, floorTypes)
 		}, function(response) {
-			console.log(response.content);
 			$scope.venues = response.content;
 			$scope.totalPages = response.totalPages;
 			$scope.totalElements = response.totalElements;
@@ -128,7 +136,6 @@ function VenueListController($scope, $modal, Venue) {
 	}
 
 	$scope.showMap = function(inx) {
-		console.log($scope.venues[inx]);
 		var modalInstance = $modal.open({
 			animation : true,
 			templateUrl : 'venueMap.html',
