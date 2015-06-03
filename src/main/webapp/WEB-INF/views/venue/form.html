@@ -93,7 +93,7 @@
 					name="latitude" placeholder="Latitude" readonly
 					ng-model="venue.latitude"></div>
 				<div class="googleMapsLink col-md-4">
-					<a href="#">Open Google map</a>
+					<a href="" ng-click="openMapModal()">Open Google map</a>
 				</div>
 			</div>
 		</div>
@@ -108,4 +108,20 @@
 			</div>
 		</div>
 	</form>
+	
+	<script type="text/ng-template" id="venueMap.html">
+        <div class="modal-header">
+            <h3 class="modal-title">Set Coordinates</h3>
+        </div>
+        <div class="modal-body">
+            <div id="map_canvas">
+    			<ui-gmap-google-map ng-if="render" center="map.center" zoom="map.zoom" options="options" events="map.events">
+					<ui-gmap-marker ng-if="marker.render" coords="marker.coords" idkey="marker.id"></ui-gmap-marker>
+				</ui-gmap-google-map>
+			</div>
+        </div>
+		<div class="modal-footer">
+			<button class="btn btn-primary" ng-click="returnCoordinates()">OK</button>
+		</div>
+    </script>
 </div>

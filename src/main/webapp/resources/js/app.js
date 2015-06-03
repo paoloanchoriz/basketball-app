@@ -49,39 +49,160 @@ angular.module('myApp', ['ngRoute', 'ngResource', 'ui.bootstrap', 'uiGmapgoogle-
     		}
     	});
     }]).controller('VenueMapController', function($scope, $modalInstance, venueDetails) {
-    	console.log(google.maps);
     	$scope.venue = venueDetails;
     	$scope.map = {
     		zoom: 16,
-    		center: { latitude: venueDetails.latitude, longitude: venueDetails.longitude },
-//    		events : {
-//    			tilesloaded: function (map) {
-//    				$scope.$apply(function () {
-//    					console.log('this is the map instance');
-//    					console.log(map);
-//    	            });
-//    			}
-//    		}
-	    	
+    		center: { latitude: venueDetails.latitude, longitude: venueDetails.longitude }
     	};
     	$scope.options = { disableDoubleClickZoom: true };
     	
     	$scope.render = true;
-    });
+    }).controller('VenuePickerController', 
+    		['$scope', '$modalInstance', 'venueDetails', 'uiGmapGoogleMapApi',
+    		 	function($scope, $modalInstance, venueDetails, uiGmapGoogleMapApi) {
+    			
+    				$scope.returnCoordinates = function() {
+    					$modalInstance.close($scope.coordinates);
+    				};
+    				
+    				var setMarker = function(latitude, longitude) {
+    					$scope.marker = {
+    						id: 0,
+    						coords: {
+    							latitude: latitude,
+    							longitude: longitude
+    						},
+    						render: true
+    					}
+    					$scope.coordinates = {};
+    					$scope.coordinates.latitude = latitude;
+    					$scope.coordinates.longitude = longitude;
+    				};
+    				
+    				var setCenter = function(lat, lng) {
+    					$scope.map = {
+    						zoom: 15,
+    						center: { latitude: lat, longitude: lng },
+    						events: {
+    							dblclick: function(mapModel, eventName, originalEventArgs) {
+    								var coordinates = originalEventArgs[0].latLng;
+    								
+    								$scope.$apply(function() {
+    									setMarker(coordinates.lat(), coordinates.lng());
+    								});
+    							}
+    						}
+    					};
+    					$scope.options = { disableDoubleClickZoom: true };
+    					$scope.render = true;
+    				};
+    				
+    				var setCurrentLocation = function() {
+    					navigator.geolocation.getCurrentPosition(function(position) {
+    						$scope.$apply(
+    								setCenter(position.coords.latitude, 
+    										position.coords.longitude));
+    					});
+    				};
+    				
+    				if(venueDetails.longitude && venueDetails.latitude) {
+						setCenter(venueDetails.latitude, venueDetails.longitude);
+						setMarker(venueDetails.latitude, venueDetails.longitude);
+					} else if(venueDetails.city + venueDetails.province){
+						var addressArr = [];
+						var city = venueDetails.city;
+						var province = venueDetails.province;
+						if(city) addressArr.push(city);
+						if(province) addressArr.push(province);
+						
+						if(addressArr.length) {
+							
+							addressArr.push('Philippines');
+							var address = addressArr.join(',');
+							uiGmapGoogleMapApi.then(function(maps) {
+								var geocoder = new maps.Geocoder();
+	    						geocoder.geocode({
+	    							'address': address + ',Philippines'
+	    						}, function(results, status) {
+	    							if(status === google.maps.GeocoderStatus.OK) {
+	    								var location = results[0].geometry.location;
+	    								$scope.$apply(
+	    										setCenter(location.lat(), 
+	    												location.lng()));
+	    							} else {
+	    								setCurrentLocation();
+	    							}
+	    						});
+							});
+						}
+					} else {
+						setCurrentLocation();
+					}
+    			}
+    ]);
 
+function VenueEditController($scope, $routeParams, $location, $modal, Venue) {
+	$scope.venue = Venue.get({
+		venueId : $routeParams.venueId
+	});
 
-function VenueCreateController($scope, $location, Venue) {
+	$scope.save = function() {
+		$scope.venue.$update({
+			venueId : $scope.venue.venueId
+		}, function() {
+			$location.path('/venue');
+		});
+	}
+	
+	$scope.openMapModal = function() {
+		var modalInstance = $modal.open({
+			animation : true,
+			templateUrl : 'venueMap.html',
+			controller : 'VenuePickerController',
+			resolve : {
+				venueDetails : function() {
+					return $scope.venue;
+				}
+			}
+		});
+		
+		modalInstance.result.then(function(coordinates) {
+			console.log(coordinates);
+			$scope.venue.latitude = coordinates.latitude;
+			$scope.venue.longitude = coordinates.longitude;
+		});
+	}
+}
+
+function VenueCreateController($scope, $location, $modal, Venue) {
 	$scope.venue = new Venue();
 
 	// Set Default Values
-	$scope.venue.longitude = 15000;
-	$scope.venue.latitude = 15000;
 	$scope.venue.courtType = 1;
 	$scope.venue.flooringType = 1;
-
+	
 	$scope.save = function() {
 		$scope.venue.$save(function() {
 			$location.path('/venue');
+		});
+	}
+	
+	$scope.openMapModal = function() {
+		var modalInstance = $modal.open({
+			animation : true,
+			templateUrl : 'venueMap.html',
+			controller : 'VenuePickerController',
+			resolve : {
+				venueDetails : function() {
+					return $scope.venue;
+				}
+			}
+		});
+		
+		modalInstance.result.then(function(coordinates) {
+			console.log(coordinates);
+			$scope.venue.latitude = coordinates.latitude;
+			$scope.venue.longitude = coordinates.longitude;
 		});
 	}
 }
@@ -150,16 +271,3 @@ function VenueListController($scope, $modal, Venue) {
 	}
 }
 
-function VenueEditController($scope, $routeParams, $location, Venue) {
-	$scope.venue = Venue.get({
-		venueId : $routeParams.venueId
-	});
-
-	$scope.save = function() {
-		$scope.venue.$update({
-			venueId : $scope.venue.venueId
-		}, function() {
-			$location.path('/venue');
-		});
-	}
-}

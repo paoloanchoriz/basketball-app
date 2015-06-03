@@ -52,6 +52,7 @@ html, body, #map-canvas {
 				});
 				
 				google.maps.event.addListener(map, 'dblclick', function(event) {
+					console.log(event.latLng.lat());
 					marker.setPosition(event.latLng);
 				});
     		}
