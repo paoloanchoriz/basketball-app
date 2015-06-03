@@ -167,7 +167,6 @@ function VenueEditController($scope, $routeParams, $location, $modal, Venue) {
 		});
 		
 		modalInstance.result.then(function(coordinates) {
-			console.log(coordinates);
 			$scope.venue.latitude = coordinates.latitude;
 			$scope.venue.longitude = coordinates.longitude;
 		});
@@ -200,7 +199,6 @@ function VenueCreateController($scope, $location, $modal, Venue) {
 		});
 		
 		modalInstance.result.then(function(coordinates) {
-			console.log(coordinates);
 			$scope.venue.latitude = coordinates.latitude;
 			$scope.venue.longitude = coordinates.longitude;
 		});
