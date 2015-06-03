@@ -49,18 +49,19 @@ angular.module('myApp', ['ngRoute', 'ngResource', 'ui.bootstrap', 'uiGmapgoogle-
     		}
     	});
     }]).controller('VenueMapController', function($scope, $modalInstance, venueDetails) {
+    	console.log(google.maps);
     	$scope.venue = venueDetails;
     	$scope.map = {
     		zoom: 16,
     		center: { latitude: venueDetails.latitude, longitude: venueDetails.longitude },
-    		events : {
-    			tilesloaded: function (map) {
-    				$scope.$apply(function () {
-    					console.log('this is the map instance');
-    					console.log(map);
-    	            });
-    			}
-    		}
+//    		events : {
+//    			tilesloaded: function (map) {
+//    				$scope.$apply(function () {
+//    					console.log('this is the map instance');
+//    					console.log(map);
+//    	            });
+//    			}
+//    		}
 	    	
     	};
     	$scope.options = { disableDoubleClickZoom: true };

@@ -34,7 +34,8 @@ html, body, #map-canvas {
     	geocoder.geocode({
     		'address': 'Mandaluyong City, Philippines'
     	}, function(results, status) {
-    		console.log(results);
+    		console.log(results[0].geometry.location.lat());
+    		console.log(results[0].geometry.location.lng());
     		if(status === google.maps.GeocoderStatus.OK) {
     			var myOptions = {
 					zoom: 16,
