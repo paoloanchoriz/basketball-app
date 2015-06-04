@@ -4,7 +4,7 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.panchoriz</groupId>
-	<artifactId>spring-mvc-bootstrap-angularjs-tiles-thymleaf</artifactId>
+	<artifactId>basketball-app</artifactId>
 	<name>basketball-app</name>
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>

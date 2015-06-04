@@ -110,6 +110,7 @@
 									<li class="list-group-item">{{ venue.streetAddress }}</li>
 									<li class="list-group-item">{{ venue.city }}, {{ venue.province }}</li>
 									<li class="list-group-item"><i class="fa fa-phone"></i>{{ venue.contact }}</li>
+									<li class="list-group-item">{{ venue.rate | phPeso }}</li>
 									<li class="list-group-item">{{ venue.courtType | courtType }}, {{ venue.flooringType | floorType }}</li>
 								</ul>
 							</div>

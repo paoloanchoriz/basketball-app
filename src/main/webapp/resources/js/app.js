@@ -48,16 +48,19 @@ angular.module('myApp', ['ngRoute', 'ngResource', 'ui.bootstrap', 'uiGmapgoogle-
     			$templateCache.remove(current.templateUrl);
     		}
     	});
-    }]).controller('VenueMapController', function($scope, $modalInstance, venueDetails) {
-    	$scope.venue = venueDetails;
-    	$scope.map = {
-    		zoom: 16,
-    		center: { latitude: venueDetails.latitude, longitude: venueDetails.longitude }
-    	};
-    	$scope.options = { disableDoubleClickZoom: true };
-    	
-    	$scope.render = true;
-    }).controller('VenuePickerController', 
+    }]).controller('VenueMapController', 
+    		['$scope', '$modalInstance', 'venueDetails', 
+    		 	function($scope, $modalInstance, venueDetails) {
+			    	$scope.venue = venueDetails;
+			    	$scope.map = {
+			    		zoom: 16,
+			    		center: { latitude: venueDetails.latitude, longitude: venueDetails.longitude }
+			    	};
+			    	$scope.options = { disableDoubleClickZoom: true };
+			    	
+			    	$scope.render = true;
+			    }
+    ]).controller('VenuePickerController', 
     		['$scope', '$modalInstance', 'venueDetails', 'uiGmapGoogleMapApi',
     		 	function($scope, $modalInstance, venueDetails, uiGmapGoogleMapApi) {
     			

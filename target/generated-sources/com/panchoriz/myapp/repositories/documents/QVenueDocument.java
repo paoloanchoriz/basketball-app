@@ -31,9 +31,9 @@ public class QVenueDocument extends EntityPathBase<VenueDocument> {
 
     public final NumberPath<Integer> flooringType = createNumber("flooringType", Integer.class);
 
-    public final NumberPath<Long> latitude = createNumber("latitude", Long.class);
+    public final NumberPath<Double> latitude = createNumber("latitude", Double.class);
 
-    public final NumberPath<Long> longitude = createNumber("longitude", Long.class);
+    public final NumberPath<Double> longitude = createNumber("longitude", Double.class);
 
     public final StringPath province = createString("province");
 
