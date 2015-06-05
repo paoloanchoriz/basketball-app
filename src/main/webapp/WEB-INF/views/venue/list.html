@@ -85,7 +85,7 @@
 							<div class="col-xs-12 col-sm-4">
 								<figure>
 									<static-map latitude="{{venue.latitude}}" longitude="{{venue.longitude}}" 
-										 on-click="showMap($index)" venue-name="{{venue.venueName}}"></static-map>
+										 open-map="showMap($index)" venue-name="{{venue.venueName}}"></static-map>
 								</figure>
 							</div>
 							<div class="col-xs-12 col-sm-8">
@@ -130,7 +130,9 @@
         </div>
         <div class="modal-body">
             <div id="map_canvas">
-    			<ui-gmap-google-map ng-if="render" center="map.center" zoom="map.zoom" options="options"></ui-gmap-google-map>
+    			<ui-gmap-google-map ng-if="render" center="map.center" zoom="map.zoom" options="options">
+					<ui-gmap-marker ng-if="marker.render" coords="marker.coords" idkey="marker.id"></ui-gmap-marker>
+				</ui-gmap-google-map>
 			</div>
         </div>
     </script>

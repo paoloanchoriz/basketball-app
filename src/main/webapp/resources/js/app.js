@@ -40,18 +40,16 @@ angular.module('myApp', ['ngRoute', 'ngResource', 'ui.bootstrap', 'uiGmapgoogle-
     	var url = 'https://maps.googleapis.com/maps/api/staticmap';
     	var markers = 'markers=color:red|';
     	var size = 'size=600x400';
-    	
-    	 
-    	
+
     	return {
     		restrict: 'E',
     		replace: true,
-    		template: '<img class="img-responsive clickable" alt="" />',
+    		template: '<img class="img-responsive clickable" alt="" ng-click="openMap()" />',
     		scope: {
     			latitude: '@',
     			longitude: '@',
     			venueName: '@',
-    			onClick: '&onClick'
+    			openMap: '&'
     		},
     		link: function(scope, element, attr, controller) {
     			var mapMarker = markers + scope.latitude + ',' + scope.longitude;
@@ -87,6 +85,15 @@ angular.module('myApp', ['ngRoute', 'ngResource', 'ui.bootstrap', 'uiGmapgoogle-
 			    	$scope.options = { disableDoubleClickZoom: true };
 			    	
 			    	$scope.render = true;
+			    	
+			    	$scope.marker = {
+    					id: 0,
+    					coords: {
+    						latitude: venueDetails.latitude,
+    						longitude: venueDetails.longitude
+    					},
+    					render: true
+    				}
 			    }
     ]).controller('VenuePickerController', 
     		['$scope', '$modalInstance', 'venueDetails', 'uiGmapGoogleMapApi',
