@@ -90,10 +90,13 @@
 					readonly ng-model="venue.longitude"></div>
 				<div class="col-md-2"> <input type="text"
 					class="form-control col-md-4" value="2500" id="latitude"
-					name="latitude" placeholder="Latitude" readonly
-					ng-model="venue.latitude"></div>
-				<div class="googleMapsLink col-md-4">
-					<a href="" ng-click="openMapModal()">Open Google map</a>
+					name="latitude" placeholder="Latitude"
+					readonly ng-model="venue.latitude"></div>
+				<div class="googleMapsLink col-md-2">
+					<a href="" ng-click="openMapModal()">Google Map</a>
+				</div>
+				<div class="googleMapsLink col-md-2">
+					<a href="" ng-click="resetCoordinates()" ng-show="venue.longitude || venue.latitude">Reset Map</a>
 				</div>
 			</div>
 		</div>

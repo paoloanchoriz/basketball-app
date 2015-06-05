@@ -312,3 +312,7 @@ ui-gmap-google-map, div[ui-gmap-google-map] {
 	width: 538px;
 	position: absolute;
 }
+
+img.clickable {
+	cursor: pointer;
+}

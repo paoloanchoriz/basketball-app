@@ -34,7 +34,35 @@ angular.module('myApp', ['ngRoute', 'ngResource', 'ui.bootstrap', 'uiGmapgoogle-
     		var result = currencyFilter(input, 'Php ', 2) + '/hr';
     		return result;
     	}
-    }]).factory('Venue', ['$resource', function($resource) {
+    }]).directive('staticMap', function() {
+    	var zoom = 'zoom=13';
+    	var maptype= 'maptype=roadmap';
+    	var url = 'https://maps.googleapis.com/maps/api/staticmap';
+    	var markers = 'markers=color:red|';
+    	var size = 'size=600x400';
+    	
+    	 
+    	
+    	return {
+    		restrict: 'E',
+    		replace: true,
+    		template: '<img class="img-responsive clickable" alt="" />',
+    		scope: {
+    			latitude: '@',
+    			longitude: '@',
+    			venueName: '@',
+    			onClick: '&onClick'
+    		},
+    		link: function(scope, element, attr, controller) {
+    			var mapMarker = markers + scope.latitude + ',' + scope.longitude;
+    			var imgUrl = url + '?' + mapMarker + '&' + zoom + '&' + maptype + '&' + size;
+    			
+    			attr.$set('src', imgUrl);
+    			attr.$set('alt', scope.venueName);
+    			
+    		}
+    	}
+    }).factory('Venue', ['$resource', function($resource) {
     	//TODO: Need to change the path to a more configurable way
     	var Venue = $resource('/basketball-app/venue/:venueId', { venueId: '@id'}, 
     			{
@@ -119,13 +147,12 @@ angular.module('myApp', ['ngRoute', 'ngResource', 'ui.bootstrap', 'uiGmapgoogle-
 						if(province) addressArr.push(province);
 						
 						if(addressArr.length) {
-							
 							addressArr.push('Philippines');
 							var address = addressArr.join(',');
 							uiGmapGoogleMapApi.then(function(maps) {
 								var geocoder = new maps.Geocoder();
 	    						geocoder.geocode({
-	    							'address': address + ',Philippines'
+	    							'address': address
 	    						}, function(results, status) {
 	    							if(status === google.maps.GeocoderStatus.OK) {
 	    								var location = results[0].geometry.location;
@@ -155,7 +182,13 @@ function VenueEditController($scope, $routeParams, $location, $modal, Venue) {
 		}, function() {
 			$location.path('/venue');
 		});
-	}
+	};
+	
+	$scope.resetCoordinates = function() {
+		$scope.venue.latitude = '';
+		$scope.venue.longitude = '';
+		$scope.openMapModal();
+	};
 	
 	$scope.openMapModal = function() {
 		var modalInstance = $modal.open({
@@ -173,7 +206,7 @@ function VenueEditController($scope, $routeParams, $location, $modal, Venue) {
 			$scope.venue.latitude = coordinates.latitude;
 			$scope.venue.longitude = coordinates.longitude;
 		});
-	}
+	};
 }
 
 function VenueCreateController($scope, $location, $modal, Venue) {
@@ -188,6 +221,12 @@ function VenueCreateController($scope, $location, $modal, Venue) {
 			$location.path('/venue');
 		});
 	}
+	
+	$scope.resetCoordinates = function() {
+		$scope.venue.latitude = '';
+		$scope.venue.longitude = '';
+		$scope.openMapModal();
+	};
 	
 	$scope.openMapModal = function() {
 		var modalInstance = $modal.open({
