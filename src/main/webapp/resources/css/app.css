@@ -1,5 +1,9 @@
 @CHARSET "UTF-8";
 
+body {
+	background-color: #f5f5f5;
+}
+
 .full {
 	width: 100%;
 }
@@ -247,21 +251,6 @@ div#venue-search label {
 	margin-top: 2px;
 }
 
-div#venue-search input[type='text'] {
-	height: 25px;
-}
-
-div#venue-search div.form-group label, div#venue-search div.form-group div
-	{
-	padding-left: 5px;
-	padding-right: 5px;
-}
-
-div#venue-search div.form-group label.filter-check {
-	padding-left: 5px;
-	padding-right: 5px;
-}
-
 div#venue-search input[type="checkbox"] {
 	margin-top: 0px;
 }
@@ -272,12 +261,13 @@ div#venue-search .btn {
 }
 
 div#body-proper {
-	min-height: 680px; padding-bottom : 75px;
-	margin-top: 80px;
-	margin-bottom: 60px;
+	min-height: 680px;
+	padding-bottom: 75px;
+	margin-top: 45px; margin-bottom : 60px;
 	margin-right: 25px;
 	margin-left: 25px;
 	padding-bottom: 75px;
+	margin-bottom: 60px;
 }
 
 label.right-align {
@@ -315,4 +305,93 @@ ui-gmap-google-map, div[ui-gmap-google-map] {
 
 img.clickable {
 	cursor: pointer;
+}
+
+label.filter-check {
+	font-weight: normal;
+}
+
+div#venueSearch hr {
+	margin-top: 5px;
+	margin-bottom: 15px;
+}
+
+div#venueList hr {
+	margin-top: 5px;
+	margin-bottom: 5px;
+	border-top: 1px solid #eee;
+}
+
+div#venueSearch button {
+	float: right;
+	margin-bottom: 20px;
+}
+
+div#venueSearch {
+	background-color: #fff;
+	padding-top: 10px;
+}
+
+label.filter-check {
+	font-weight: normal;
+}
+
+a.bo_blue {
+	color: #fff;
+	padding: 5px 7px 5px 7px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	overflow: hidden;
+	text-align: center;
+	text-decoration: none;
+	font-size: 12px;
+	font-weight: 600;
+	-webkit-font-smoothing: antialiased;
+	cursor: pointer;
+	min-height: 18px;
+	border: 0;
+	background: #4e8fc1;
+	text-shadow: 0 0 0 transparent;
+}
+
+.bo_blue:hover {
+	color:#fff;
+	background:#4082b6;	
+}
+
+div.info-box {
+	border-color: #ddd;
+	margin-bottom: 20px;
+ 	background-color: #fff;
+ 	color: #333;
+ 	padding: 10px 15px;
+ 	border-bottom: 1px solid transparent;
+ 	border-top-right-radius: 3px;
+ 	border-top-left-radius: 3px;
+}
+
+div.extra-information {
+	font-size: 12px;
+	padding-right: 0px;
+	padding-left: 0px;
+}
+
+div.extra-information-value {
+	padding-bottom: 5px;
+}
+
+div.info-box-footer {
+	margin-top: 15px;
+}
+
+div.extra-information div:first-child {
+	border: 1px solid #eee;
+	border: 1px solid #eee;
+}
+
+div.extra-information div {
+	padding-left: 10px;
+	padding-top: 5px;
+	background-color: #f5f5f5;
 }
