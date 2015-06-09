@@ -3,6 +3,8 @@ package com.panchoriz.myapp.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.panchoriz.myapp.utils.ProvinceAndCitiesUtility;
+
 @RequestMapping("/view")
 @Controller
 public class TemplateController {
@@ -13,6 +15,7 @@ public class TemplateController {
 	
 	@RequestMapping({"/venue/add", "/venue/edit"})
 	public String getVenueForm() {
+		System.out.println(ProvinceAndCitiesUtility.getLocationMap());
 		return "/venue/form";
 	}
 	
