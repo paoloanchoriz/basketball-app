@@ -1,5 +1,8 @@
+var locationMap = {};
 angular.module('myApp', ['ngRoute', 'ngResource', 'ui.bootstrap', 'uiGmapgoogle-maps']).
-    config(['$routeProvider', 'uiGmapGoogleMapApiProvider', function ($routeProvider, uiGmapGoogleMapApiProvider) {
+	constant('Constants',{
+		locationsMap: '',
+	}).config(['$routeProvider', 'uiGmapGoogleMapApiProvider', function ($routeProvider, uiGmapGoogleMapApiProvider) {
         $routeProvider
         	.when('/venue', {templateUrl: 'view/venue/list', controller: VenueListController})
         	.when('/venue/add', {templateUrl: 'view/venue/add', controller: VenueCreateController})
@@ -73,6 +76,10 @@ angular.module('myApp', ['ngRoute', 'ngResource', 'ui.bootstrap', 'uiGmapgoogle-
     		if(typeof(current) !== 'undefined') {
     			$templateCache.remove(current.templateUrl);
     		}
+    	});
+    }]).run(['$http', 'Constants',function($http, Constants) {
+    	$http.get('/basketball-app/locationsMap').success(function(data) {
+    		Constants.locationsMap = data;
     	});
     }]).controller('VenueMapController', 
     		['$scope', '$modalInstance', 'venueDetails', 
@@ -254,7 +261,7 @@ function VenueCreateController($scope, $location, $modal, Venue) {
 	}
 }
 
-function VenueListController($scope, $modal, Venue) {
+function VenueListController($scope, $modal, Venue, Constants) {
 	$scope.searchCondition = "";
 	$scope.city = "";
 	$scope.province = "";

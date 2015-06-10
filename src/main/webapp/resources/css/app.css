@@ -395,3 +395,7 @@ div.extra-information div {
 	padding-top: 5px;
 	background-color: #f5f5f5;
 }
+
+div.map-image {
+	margin-bottom: 10px;
+}
