@@ -1,7 +1,7 @@
-var locationMap = {};
-angular.module('myApp', ['ngRoute', 'ngResource', 'ui.bootstrap', 'uiGmapgoogle-maps']).
+angular.module('myApp', ['ngRoute', 'ngResource', 'ui.bootstrap', 'uiGmapgoogle-maps', 'ui.filters', 'AxelSoft']).
 	constant('Constants',{
 		locationsMap: '',
+		provinceList: ''
 	}).config(['$routeProvider', 'uiGmapGoogleMapApiProvider', function ($routeProvider, uiGmapGoogleMapApiProvider) {
         $routeProvider
         	.when('/venue', {templateUrl: 'view/venue/list', controller: VenueListController})
@@ -78,8 +78,18 @@ angular.module('myApp', ['ngRoute', 'ngResource', 'ui.bootstrap', 'uiGmapgoogle-
     		}
     	});
     }]).run(['$http', 'Constants',function($http, Constants) {
-    	$http.get('/basketball-app/locationsMap').success(function(data) {
-    		Constants.locationsMap = data;
+    	var getLocationsMap = $http.get('/basketball-app/locationsMap').then(function(data) {
+    		return data;
+    	});
+    	
+    	getLocationsMap.then(function(result) {
+    		var locationsMap = result.data;
+    		var provinceList = [];
+    		for(var province in locationsMap) {
+    			provinceList.push(province);
+    		}
+    		Constants.locationsMap = locationsMap;
+    		Constants.provinceList = provinceList;
     	});
     }]).controller('VenueMapController', 
     		['$scope', '$modalInstance', 'venueDetails', 
@@ -266,6 +276,9 @@ function VenueListController($scope, $modal, Venue, Constants) {
 	$scope.city = "";
 	$scope.province = "";
 	$scope.pageNo = 1;
+	
+	$scope.provinces = Constants.provinceList;
+	
 	var courtTypes = [ 'indoor', 'covered', 'outdoor' ];
 	var floorTypes = [ 'hardWood', 'rubberized', 'cement' ];
 	var setDefaults = function(obj, types) {

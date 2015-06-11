@@ -15,4 +15,9 @@ public class HomeController {
 	public String getSampleGoogleMaps() {
 		return "sampleGoogleMaps";
 	}
+	
+	@RequestMapping("/sampleCustomSelect")
+	public String getSampleCustomSelect() {
+		return "sampleCustomSelect";
+	}
 }

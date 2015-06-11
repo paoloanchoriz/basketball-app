@@ -19,8 +19,9 @@
 					</div>
 					<div class="form-group">
 						<div style="margin-bottom:5px;">
-							<input type="text" class="form-control" id="search"
-								placeholder="Province" id="province" ng-model="province" />
+							<div custom-select ng-model="province" ng-options="p for p in provinces"></div>
+							<!-- <input type="text" class="form-control" id="search"
+								placeholder="Province" id="province" ng-model="province" /> -->
 						</div>
 						<div>
 							<input type="text" class="form-control" id="search"
