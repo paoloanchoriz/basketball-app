@@ -278,6 +278,14 @@ function VenueListController($scope, $modal, Venue, Constants) {
 	$scope.pageNo = 1;
 	
 	$scope.provinces = Constants.provinceList;
+	$scope.provinceOptions = {
+		displayText: 'Province'
+	}
+	
+	$scope.locationsMap = Constants.locationsMap;
+	$scope.cityOptions = {
+		displayText: 'City/Municipality'
+	}
 	
 	var courtTypes = [ 'indoor', 'covered', 'outdoor' ];
 	var floorTypes = [ 'hardWood', 'rubberized', 'cement' ];
