@@ -607,3 +607,7 @@ div.extra-information div {
 div.map-image {
 	margin-bottom: 10px;
 }
+
+div.venue-list div.add-new-button {
+	margin-top: 25px;
+}

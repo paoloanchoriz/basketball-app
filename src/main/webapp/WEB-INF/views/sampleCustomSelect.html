@@ -92,6 +92,7 @@
 			(function () {
 				var app = angular.module('Demo', ['ui.filters', 'AxelSoft']);
 				app.controller('DemoController', ['$scope', '$timeout', function ($scope, $timeout) {
+					$scope.fruit = 'apple';
 					$scope.fruits = ['apple', 'orange', 'mango', 'grapefruit', 'banana', 'melon'];
 					$scope.setToMango = function () {
 						$scope.fruit = 'mango';

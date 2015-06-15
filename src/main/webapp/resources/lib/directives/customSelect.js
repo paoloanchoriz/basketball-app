@@ -91,7 +91,7 @@
 												+ '" />'
 												+ '</div>'
 												+ '<ul role="menu">'
-												+ '<li role="presentation"><a role="menuitem" tabindex="-1" href ng-click="select()" ng-bind="displayText"></a></li>' //TODO: Here change default display
+												+ '<li role="presentation"><a role="menuitem" tabindex="-1" href ng-click="select()" ng-bind="defaultText"></a></li>' //TODO: Here change default display
 												+ '<li role="presentation" ng-repeat="'
 												+ valueName
 												+ ' in '
@@ -306,6 +306,9 @@
 
 											childScope.displayText = text
 													|| options.displayText;
+											
+											if(!childScope.defaultText)
+												childScope.defaultText = options.displayText; 
 										}
 
 										function getOptions() {

@@ -78,6 +78,7 @@ angular.module('myApp', ['ngRoute', 'ngResource', 'ui.bootstrap', 'uiGmapgoogle-
     		}
     	});
     }]).run(['$http', 'Constants',function($http, Constants) {
+    	//TODO: Need to change the path to a more configurable way
     	var getLocationsMap = $http.get('/basketball-app/locationsMap').then(function(data) {
     		return data;
     	});
@@ -195,11 +196,21 @@ angular.module('myApp', ['ngRoute', 'ngResource', 'ui.bootstrap', 'uiGmapgoogle-
     			}
     ]);
 
-function VenueEditController($scope, $routeParams, $location, $modal, Venue) {
+function VenueEditController($scope, $routeParams, $location, $modal, Venue, Constants) {
 	$scope.venue = Venue.get({
 		venueId : $routeParams.venueId
 	});
-
+	
+	$scope.provinces = Constants.provinceList;
+	$scope.provinceOptions = {
+		displayText: 'Province'
+	}
+	
+	$scope.locationsMap = Constants.locationsMap;
+	$scope.cityOptions = {
+		displayText: 'City/Municipality'
+	}
+	
 	$scope.save = function() {
 		$scope.venue.$update({
 			venueId : $scope.venue.venueId
@@ -233,9 +244,19 @@ function VenueEditController($scope, $routeParams, $location, $modal, Venue) {
 	};
 }
 
-function VenueCreateController($scope, $location, $modal, Venue) {
+function VenueCreateController($scope, $location, $modal, Venue, Constants) {
 	$scope.venue = new Venue();
-
+	
+	$scope.provinces = Constants.provinceList;
+	$scope.provinceOptions = {
+		displayText: 'Province'
+	}
+	
+	$scope.locationsMap = Constants.locationsMap;
+	$scope.cityOptions = {
+		displayText: 'City/Municipality'
+	}
+	
 	// Set Default Values
 	$scope.venue.courtType = 1;
 	$scope.venue.flooringType = 1;
