@@ -16,9 +16,7 @@ public class VenueDocument extends AbstractDocument<String> {
 	private String venueName;
 	private String contact;
 	private String streetAddress;
-	// TODO: this will be replaced by db entries
 	private String city;
-	// TODO: this will be replaced by db entries
 	private String province;
 	
 	private double rate;

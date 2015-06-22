@@ -25,4 +25,9 @@ public class TemplateController {
 	public String getVenueDetail() {
 		return "/venue/detail";
 	}
+	
+	@RequestMapping("/gameSchedule/add")
+	public String getGameScheduleForm() {
+		return "/gameSchedule/form";
+	}
 }

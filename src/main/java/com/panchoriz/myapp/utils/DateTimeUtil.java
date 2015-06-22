@@ -16,6 +16,8 @@ public class DateTimeUtil {
 	
 	private static final SimpleDateFormat WITH_TIME = new SimpleDateFormat("yyyyMMddHHmmssSSS");
 	
+	private static final SimpleDateFormat TIME = new SimpleDateFormat("HH:mm");
+	
 	public static SimpleDateFormat getDateFormatter() {
 		return FORMAT;
 	}
@@ -29,6 +31,10 @@ public class DateTimeUtil {
 	}
 	
 	public static Date getParsedDate(String date) {
+		return getParsedDate(date, FORMAT);
+	}
+	
+	public static Date getParsedDate(String date, SimpleDateFormat sdf) {
 		try{
 			return FORMAT.parse(date);
 		}catch(ParseException e) {
@@ -38,6 +44,10 @@ public class DateTimeUtil {
 	
 	public static String getFormattedDate(Date date) {
 		return FORMAT.format(date);
+	}
+	
+	public static String getFormattedTime(Date date) {
+		return TIME.format(date);
 	}
 	
 	public static String getFormattedDateWithTime(Date date) {

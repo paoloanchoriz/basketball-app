@@ -77,6 +77,15 @@
 				</div>
 			</div>
 			<div class="col-lg-9" id="venueList">
+				<div class="col-lg-9" ng-show="!venues.length">
+					<div class="row">
+						<span class="empty-search">Search Condition did not return
+							any results.</span>
+						<div>
+							<span>Please try another set of conditions.</span>
+						</div>
+					</div>
+				</div>
 				<div class="panel panel-default info-box" ng-repeat="venue in venues" ng-show="venues.length">
 						<div class="row">
 							<div class="col-lg-12">
@@ -129,16 +138,6 @@
 				<pagination ng-click="searchAction(pageNo)" max-size="10" ng-show="totalElements"
 					items-per-page="10" total-items="totalElements" ng-model="pageNo"
 					class="pagination-sm" rotate="true" boundary-links="true"></pagination>
-			</div>
-		</div>
-	</div>
-
-	<div class="row" ng-show="!venues.length">
-		<div>
-			<span class="empty-search">Search Condition did not return
-				any results.</span>
-			<div>
-				<span>Please try another set of conditions.</span>
 			</div>
 		</div>
 	</div>

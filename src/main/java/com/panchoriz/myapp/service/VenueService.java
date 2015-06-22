@@ -22,7 +22,7 @@ import com.panchoriz.myapp.utils.DateTimeUtil;
 public class VenueService {
 	
 	@Autowired private VenueRepository  venueRepository;
-
+	
 	public VenueDTO findById(String id) {
 		return getTransferObject(venueRepository.findOne(id));
 	}
@@ -83,14 +83,16 @@ public class VenueService {
 	
 	public Page<VenueDTO> getVenues(VenueSearch venueSearch, int pageNo) {
 		Predicate searchPredicate = getPredicate(venueSearch);
-		return venueRepository.findAll(searchPredicate,
+		Page<VenueDTO> venuePage = venueRepository.findAll(searchPredicate,
 					new PageRequest(pageNo, 10, new Sort(Sort.Direction.ASC, "venueName"))
 				).map(new Converter<VenueDocument, VenueDTO>() {
-			@Override
-			public VenueDTO convert(VenueDocument source) {
-				return getTransferObject(source);
-			}
-		});
+					@Override
+					public VenueDTO convert(VenueDocument source) {
+						return getTransferObject(source);
+					}
+				});
+		
+		return venuePage;
 	}
 	
 	private void setMainSearch(BooleanBuilder mainPredicate, QVenueDocument venueQ, String searchConditions) {

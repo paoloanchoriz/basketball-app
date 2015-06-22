@@ -30,10 +30,9 @@ public class VenueController {
 			@RequestParam(value = "courtType", required = false)Number[] courtType, 
 			@RequestParam(value = "floorType", required = false)Number[] floorType) {
 		
-			VenueSearchBuilder searchBuilder = venueService.new VenueSearchBuilder();
-			searchBuilder.searchCondition(searchCondition).province(province)
-					.city(city).courtType(courtType).floorType(floorType);
-			
+		VenueSearchBuilder searchBuilder = venueService.new VenueSearchBuilder();
+		searchBuilder.searchCondition(searchCondition).province(province)
+			.city(city).courtType(courtType).floorType(floorType);
 		return venueService.getVenues(searchBuilder.build(), pageNo);
 	}
 	
