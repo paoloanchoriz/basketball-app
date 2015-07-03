@@ -7,7 +7,8 @@ angular.module('myApp',
 		 'staticMap',
 		 'venueService',
 		 'ui.bootstrap',
-		 'venueController'
+		 'venueController',
+		 'gameScheduleController'
 		 ]
 	).constant('Constants',{
 		locationsMap: '',
@@ -18,7 +19,7 @@ angular.module('myApp',
         	.when('/venue/add', {templateUrl: 'view/venue/add', controller: 'VenueFormController'})
         	.when('/venue/:venueId', {templateUrl: 'view/venue/add', controller: 'VenueFormController'})
         	
-        	.when('/gameSchedule/add', {templateUrl: 'view/gameSchedule/add', controller: 'VenueFormController'})
+        	.when('/gameSchedule/add', {templateUrl: 'view/gameSchedule/add', controller: 'GameScheduleFormController'})
         	
         	.otherwise({ redirectTo: '/venue' });
         

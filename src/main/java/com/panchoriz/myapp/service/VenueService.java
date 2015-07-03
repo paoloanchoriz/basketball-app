@@ -98,12 +98,10 @@ public class VenueService {
 	private void setMainSearch(BooleanBuilder mainPredicate, QVenueDocument venueQ, String searchConditions) {
 		BooleanBuilder streetAddress = new BooleanBuilder();
 		mainPredicate.or(streetAddress);
-		String[] sampleSearch = searchConditions.split(" ");
-		for(String searchStr:sampleSearch) {
-			if(StringUtils.isNotBlank(searchStr)) {
-				mainPredicate.or(venueQ.venueName.matches(searchStr));
-				streetAddress.or(venueQ.streetAddress.matches(searchStr));
-			}
+		if(StringUtils.isNotBlank(searchConditions)) {
+			String regexCondition = "(?i)" + searchConditions;
+			mainPredicate.or(venueQ.venueName.matches(regexCondition));
+			streetAddress.or(venueQ.streetAddress.matches(regexCondition));
 		}
 	}
 	

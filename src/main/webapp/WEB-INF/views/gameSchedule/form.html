@@ -11,45 +11,28 @@
 				<div class="form-group">
 					<label class="control-label col-sm-2" for="provice">Province:</label>
 					<div class="col-sm-4">
-						<div custom-select="provinceOptions" ng-model="venue.province" ng-change="city = ''" ng-options="p for p in provinces"></div>
+						<div custom-select="provinceOptions" ng-model="game.province" ng-change="game.city = ''" ng-options="p for p in provinces"></div>
 					</div>
 				</div>
 				
 				<div class="form-group">
 					<label class="control-label col-sm-2" for="city">City/Municipality:</label>
 					<div class="col-sm-4">
-						<div custom-select="cityOptions" ng-disabled="!venue.province" ng-model="venue.city" ng-options="c for c in locationsMap[venue.province]"></div>
+						<div custom-select="cityOptions" ng-disabled="!game.province" ng-model="game.city" ng-options="c for c in locationsMap[game.province]"></div>
 					</div>
 				</div>
 				
-				<input type="hidden" name="venueId" value="" ng-model="venue.venueId" readonly/>
+				<input type="hidden" value="" ng-model="game.venueId" readonly/>
 				<div class="form-group">
 					<label class="control-label col-sm-2" for="venueName">Venue Name:</label>
 					<div class="col-sm-4">
-						<input type="text" class="form-control" id="venueName"
-							name="venueName" placeholder="Enter venue name"
-							ng-model="venue.venueName">
-					</div>
-				</div>
-				
-		
-				<!-- Google Maps support to follow. -->
-				<div class="form-group row">
-					<label class="control-label col-sm-2">Coordinates:</label>
-					<div class="col-md-8">
-						<div class="col-md-2"> <input type="text" class="form-control col-md-4" 
-							value="2500" id="longitude" name="longitude" placeholder="Longitude"
-							readonly ng-model="venue.longitude"></div>
-						<div class="col-md-2"> <input type="text"
-							class="form-control col-md-4" value="2500" id="latitude"
-							name="latitude" placeholder="Latitude"
-							readonly ng-model="venue.latitude"></div>
-						<div class="googleMapsLink col-md-2">
-							<a href="" ng-click="openMapModal()">Google Map</a>
-						</div>
-						<div class="googleMapsLink col-md-2">
-							<a href="" ng-click="resetCoordinates()" ng-show="venue.longitude || venue.latitude">Reset Map</a>
-						</div>
+						<input type="text" placeholder="Venue Name" typeahead-loading="loadingVenues" 
+							typeahead="venue for venue in fetchVenues($viewValue)"
+							ng-disabled="!game.city" ng-model="game.venueName" class="form-control"
+							typeahead-template-url="typeAhead.html"
+							typeahead-on-select="onSelect($item)"/>
+							
+							<i ng-show="loadingVenues" class="glyphicon glyphicon-refresh"></i>
 					</div>
 				</div>
 				
@@ -65,4 +48,9 @@
 			</form>
 		</div>
 	</div>
+	<script type="text/ng-template" id="typeAhead.html">
+  		<a>
+      		<span bind-html-unsafe="match.label.venueName | typeaheadHighlight:query"></span>
+  		</a>
+	</script>
 </div>
